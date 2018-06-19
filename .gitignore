@@ -99,3 +99,4 @@ ENV/
 
 # mypy
 .mypy_cache/
+twitter_keys_data.py
