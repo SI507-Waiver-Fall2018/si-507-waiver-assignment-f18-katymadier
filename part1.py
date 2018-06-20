@@ -93,13 +93,7 @@ print("ADJECTIVES: " +", ".join(frequent_adj))
 original_tweets=[]
 favorites=0
 retweets=0
-retweets_all=[]
-retweets_total=0
-favorites_all=[]
 for tweet in all_tweets[:tweet_number]:
-    favorites_all+=[tweet.favorite_count]
-    retweets_all+=[tweet.retweet_count]
-    retweets_total+=tweet.retweet_count
     if tweet.text.startswith("RT")==False:
         original_tweets+=[tweet.text]
         favorites+=tweet.favorite_count
@@ -115,26 +109,8 @@ print("TIMES RETWEETED (ORIGINAL TWEETS ONLY): " + str(retweets) )
 
 # Export CSV with 5 most common nouns
 f = open("noun_data.csv","w")
+f.write(str(tweet_number)+" tweets analyzed from "+twitter_name.screen_name+"'s Twitter feed.\nThese are the top 5 nouns and their frequencies.\n")
 f.write("NOUN, NUMBER\n")
 for noun in fdistnoun.most_common(5):
     f.write("{},{}\n".format(noun[0],noun[1]))
 f.close()
-
-# SAMPLE OUTPUT:
-# mwnewman$ python3 get_tweets.py umsi 12
-# USER: umsi
-# TWEETS ANALYZED: 12
-# VERBS: are(4) being(3) is(3) improve(2) Join(2)
-# NOUNS: umsi(8) UMSI(8) students(5) Join(5) amp(5)
-# ADJECTIVES more(5) umsi(4) doctoral(2) new(2) social(2)
-# ORIGINAL TWEETS: 8
-# TIMES FAVORITED (ORIGINAL TWEETS ONLY): 26
-# TIMES RETWEETED (ORIGINAL TWEETS ONLY): 18
-
-# SAMPLE CSV FILE OUTPUT inside a .csv file
-# Noun,Number
-# umsi,8
-# UMSI,8
-# students,5
-# Join,5
-# amp,5
